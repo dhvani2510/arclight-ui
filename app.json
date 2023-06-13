@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Arclight",
+    "slug": "Arclight",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Arclight"
+}
