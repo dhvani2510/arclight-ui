@@ -5,7 +5,12 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "58d57a98-867d-4851-b3e6-cd04ba9519b7"
+      }
+    }
   },
   "name": "Arclight"
 }
