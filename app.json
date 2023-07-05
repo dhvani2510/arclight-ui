@@ -2,10 +2,26 @@
   "expo": {
     "name": "Arclight",
     "slug": "Arclight",
+    "icon": "assets/images/icon.png",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "assets/images/adaptive-icon.png"
+      }
+    },
+    "ios": {
+      "icon": "assets/images/icon.png"
+    },
+    "splash": {
+      "image": "assets/images/splash.png",
+      "backgroundColor": "#f0f0f0",
+      "resizeMode": "cover"
+    },
+    "userInterfaceStyle": "automatic",
     "extra": {
       "eas": {
         "projectId": "58d57a98-867d-4851-b3e6-cd04ba9519b7"

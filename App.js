@@ -1,13 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet , useColorScheme } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Footer from './components/Footer';
 
 export default function App() {
+  let theme = useColorScheme();
+  let style = theme === "light" ? styles.lightContainer : styles.darkContainer;
   return (
-    <View style={styles.container}>
-      <Text>hello!!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer style={style.footer}>
+        <Footer></Footer>
+      </NavigationContainer>
   );
 }
 
@@ -17,5 +19,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+},
+
+lightContainer: {
+  backgroundColor: '#d0d0c0',
+},
+ 
+darkContainer: {
+  backgroundColor: '#ffd0c0',
+},
+footer: {
+  position: 'absolute',
+  borttom: '0'
+}
 });

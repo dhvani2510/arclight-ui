@@ -1,23 +1,18 @@
 {
   "cli": {
-    "version": ">= 3.13.3"
+    "appVersionSource": "local",
+    "version": ">=3.13.3"
   },
   "build": {
-    "development": {
-      "distribution": "internal",
-      "android": {
-        "gradleCommand": ":app:assembleDebug"
-      },
-      "ios": {
-        "buildConfiguration": "Debug"
-      }
-    },
     "preview": {
-      "distribution": "internal"
-    },
-    "production": {}
-  },
-  "submit": {
-    "production": {}
+      "developmentClient": true,
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease",
+        "applicationArchivePath": "android/app/build/outputs/**/*.{apk,aab}",
+        "withoutCredentials": true
+      },
+      "distribution": "internal",
+    }
   }
 }
