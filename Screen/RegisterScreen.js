@@ -109,11 +109,11 @@ const RegisterScreen = (props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#307ecc',
+          backgroundColor: 'white',
           justifyContent: 'center',
         }}>
         <Image
-          source={require('../Image/aboutreact.png')}
+          source={require('../Image/arclight.png')}
           style={{
             height: 150,
             resizeMode: 'contain',
@@ -133,7 +133,7 @@ const RegisterScreen = (props) => {
     );
   }
   return (
-    <View style={{flex: 1, backgroundColor: '#307ecc'}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -143,7 +143,7 @@ const RegisterScreen = (props) => {
         }}>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={require('../Image/aboutreact.png')}
+            source={require('../Image/arclight.png')}
             style={{
               width: '50%',
               height: 100,
@@ -246,7 +246,7 @@ const RegisterScreen = (props) => {
             style={styles.buttonStyle}
             activeOpacity={0.5}
             onPress={handleSubmitButton}>
-            <Text style={styles.buttonTextStyle}>REGISTER</Text>
+            <Text style={styles.buttonTextStyle}>Sign Up</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -265,10 +265,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: 'gold',
     borderWidth: 0,
     color: '#FFFFFF',
-    borderColor: '#7DE24E',
+    borderColor: 'gold',
     height: 40,
     alignItems: 'center',
     borderRadius: 30,
@@ -278,18 +278,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonTextStyle: {
-    color: '#FFFFFF',
-    paddingVertical: 10,
+    color: 'white',
+    paddingVertical: 8,
+    fontWeight: 'bold',
     fontSize: 16,
   },
   inputStyle: {
     flex: 1,
-    color: 'white',
+    color: 'black',
     paddingLeft: 15,
     paddingRight: 15,
     borderWidth: 1,
     borderRadius: 30,
-    borderColor: '#dadae8',
+    borderColor: 'gold',
   },
   errorTextStyle: {
     color: 'red',
