@@ -93,10 +93,10 @@ const LoginScreen = ({navigation}) => {
           <KeyboardAvoidingView enabled>
             <View style={{alignItems: 'center'}}>
               <Image
-                source={require('../Image/arclight.png')}
+                source={require('../Image/logo.jpg')}
                 style={{
-                  width: '50%',
-                  height: 100,
+                  width: '200%',
+                  height: 250,
                   resizeMode: 'contain',
                   margin: 30,
                 }}
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   mainBody: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#FFF',
     alignContent: 'center',
   },
   SectionStyle: {
@@ -176,6 +176,19 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
+  },
+  buttonStyle: {
+    backgroundColor: '#E9C508',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#E9C508',
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    marginTop: 20,
+    marginBottom: 25,
   },
   buttonTextStyle: {
     color: '#FFFFFF',
