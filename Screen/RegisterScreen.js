@@ -117,7 +117,7 @@ const RegisterScreen = (props) => {
         <Image
           source={require('../Image/arclight.png')}
           style={{
-            height: 150,
+            height: 200,
             resizeMode: 'contain',
             alignSelf: 'center'
           }}
@@ -129,7 +129,7 @@ const RegisterScreen = (props) => {
           style={AppStyles.buttonStyle}
           activeOpacity={0.5}
           onPress={() => props.navigation.navigate('LoginScreen')}>
-          <Text style={RegisterScreenStyles.buttonTextStyle}>Login Now</Text>
+          <Text style={AppStyles.buttonTextStyle}>Login Now</Text>
         </TouchableOpacity>
       </View>
     );
@@ -147,17 +147,17 @@ const RegisterScreen = (props) => {
           <Image
             source={require('../Image/arclight.png')}
             style={{
-              width: '50%',
-              height: 100,
+              width: '100%',
+              height: 200,
               resizeMode: 'contain',
               margin: 30,
             }}
           />
         </View>
         <KeyboardAvoidingView enabled>
-          <View style={RegisterScreenStyles.SectionStyle}>
+          <View style={AppStyles.SectionStyle}>
             <TextInput
-              style={RegisterScreenStyles.inputStyle}
+              style={AppStyles.inputStyle}
               onChangeText={(UserName) => setUserName(UserName)}
               underlineColorAndroid="#f000"
               placeholder="Enter Name"
@@ -170,9 +170,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={RegisterScreenStyles.SectionStyle}>
+          <View style={AppStyles.SectionStyle}>
             <TextInput
-              style={RegisterScreenStyles.inputStyle}
+              style={AppStyles.inputStyle}
               onChangeText={(UserEmail) => setUserEmail(UserEmail)}
               underlineColorAndroid="#f000"
               placeholder="Enter Email"
@@ -187,9 +187,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={RegisterScreenStyles.SectionStyle}>
+          <View style={AppStyles.SectionStyle}>
             <TextInput
-              style={RegisterScreenStyles.inputStyle}
+              style={AppStyles.inputStyle}
               onChangeText={(UserPassword) =>
                 setUserPassword(UserPassword)
               }
@@ -206,9 +206,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={RegisterScreenStyles.SectionStyle}>
+          <View style={AppStyles.SectionStyle}>
             <TextInput
-              style={RegisterScreenStyles.inputStyle}
+              style={AppStyles.inputStyle}
               onChangeText={(UserAge) => setUserAge(UserAge)}
               underlineColorAndroid="#f000"
               placeholder="Enter Age"
@@ -223,9 +223,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={RegisterScreenStyles.SectionStyle}>
+          <View style={AppStyles.SectionStyle}>
             <TextInput
-              style={RegisterScreenStyles.inputStyle}
+              style={AppStyles.inputStyle}
               onChangeText={(UserAddress) =>
                 setUserAddress(UserAddress)
               }
@@ -240,7 +240,7 @@ const RegisterScreen = (props) => {
             />
           </View>
           {errortext != '' ? (
-            <Text style={RegisterScreenStyles.errorTextStyle}>
+            <Text style={AppStyles.errorTextStyle}>
               {errortext}
             </Text>
           ) : null}
@@ -248,7 +248,7 @@ const RegisterScreen = (props) => {
             style={AppStyles.buttonStyle}
             activeOpacity={0.5}
             onPress={handleSubmitButton}>
-            <Text style={RegisterScreenStyles.buttonTextStyle}>Sign Up</Text>
+            <Text style={AppStyles.buttonTextStyle}>Sign Up</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>
