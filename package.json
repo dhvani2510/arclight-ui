@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "install": "npm i --force --legacypeer-deps",
+    "eas-build-pre-install": "npm config set legacy-peer-deps true",
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
