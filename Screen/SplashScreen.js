@@ -34,7 +34,7 @@ const SplashScreen = ({navigation}) => {
     <View style={styles.container}>
       <Image
         source={require('../Image/arclight.png')}
-        style={{width: '90%', resizeMode: 'contain', margin: 30}}
+        style={{width: '120%', resizeMode: 'contain', margin: 10}}
       />
       <ActivityIndicator
         animating={animating}
