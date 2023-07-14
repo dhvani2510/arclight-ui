@@ -18,6 +18,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Loader from './Components/Loader';
+import AppStyles from '../styles/shared-styles';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -143,7 +144,7 @@ const LoginScreen = ({navigation}) => {
               </Text>
             ) : null}
             <TouchableOpacity
-              style={styles.buttonStyle}
+              style={AppStyles.buttonStyle}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
               <Text style={styles.buttonTextStyle}>LOGIN</Text>
@@ -175,19 +176,6 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
-  },
-  buttonStyle: {
-    backgroundColor: '#7DE24E',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#7DE24E',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 20,
-    marginBottom: 25,
   },
   buttonTextStyle: {
     color: '#FFFFFF',

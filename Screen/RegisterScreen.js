@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 
 import Loader from './Components/Loader';
+import AppStyles from '../styles/shared-styles'
+import RegisterScreenStyles from '../styles/RegisterScreenStyles';
 
 const RegisterScreen = (props) => {
   const [userName, setUserName] = useState('');
@@ -120,14 +122,14 @@ const RegisterScreen = (props) => {
             alignSelf: 'center'
           }}
         />
-        <Text style={styles.successTextStyle}>
+        <Text style={RegisterScreenStyles.successTextStyle}>
           Registration Successful
         </Text>
         <TouchableOpacity
-          style={styles.buttonStyle}
+          style={AppStyles.buttonStyle}
           activeOpacity={0.5}
           onPress={() => props.navigation.navigate('LoginScreen')}>
-          <Text style={styles.buttonTextStyle}>Login Now</Text>
+          <Text style={RegisterScreenStyles.buttonTextStyle}>Login Now</Text>
         </TouchableOpacity>
       </View>
     );
@@ -153,9 +155,9 @@ const RegisterScreen = (props) => {
           />
         </View>
         <KeyboardAvoidingView enabled>
-          <View style={styles.SectionStyle}>
+          <View style={RegisterScreenStyles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={RegisterScreenStyles.inputStyle}
               onChangeText={(UserName) => setUserName(UserName)}
               underlineColorAndroid="#f000"
               placeholder="Enter Name"
@@ -168,9 +170,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={styles.SectionStyle}>
+          <View style={RegisterScreenStyles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={RegisterScreenStyles.inputStyle}
               onChangeText={(UserEmail) => setUserEmail(UserEmail)}
               underlineColorAndroid="#f000"
               placeholder="Enter Email"
@@ -185,9 +187,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={styles.SectionStyle}>
+          <View style={RegisterScreenStyles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={RegisterScreenStyles.inputStyle}
               onChangeText={(UserPassword) =>
                 setUserPassword(UserPassword)
               }
@@ -204,9 +206,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={styles.SectionStyle}>
+          <View style={RegisterScreenStyles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={RegisterScreenStyles.inputStyle}
               onChangeText={(UserAge) => setUserAge(UserAge)}
               underlineColorAndroid="#f000"
               placeholder="Enter Age"
@@ -221,9 +223,9 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={styles.SectionStyle}>
+          <View style={RegisterScreenStyles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={RegisterScreenStyles.inputStyle}
               onChangeText={(UserAddress) =>
                 setUserAddress(UserAddress)
               }
@@ -238,15 +240,15 @@ const RegisterScreen = (props) => {
             />
           </View>
           {errortext != '' ? (
-            <Text style={styles.errorTextStyle}>
+            <Text style={RegisterScreenStyles.errorTextStyle}>
               {errortext}
             </Text>
           ) : null}
           <TouchableOpacity
-            style={styles.buttonStyle}
+            style={AppStyles.buttonStyle}
             activeOpacity={0.5}
             onPress={handleSubmitButton}>
-            <Text style={styles.buttonTextStyle}>Sign Up</Text>
+            <Text style={RegisterScreenStyles.buttonTextStyle}>Sign Up</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -254,53 +256,3 @@ const RegisterScreen = (props) => {
   );
 };
 export default RegisterScreen;
-
-const styles = StyleSheet.create({
-  SectionStyle: {
-    flexDirection: 'row',
-    height: 40,
-    marginTop: 20,
-    marginLeft: 35,
-    marginRight: 35,
-    margin: 10,
-  },
-  buttonStyle: {
-    backgroundColor: 'gold',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: 'gold',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  buttonTextStyle: {
-    color: 'white',
-    paddingVertical: 8,
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  inputStyle: {
-    flex: 1,
-    color: 'black',
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
-    borderRadius: 30,
-    borderColor: 'gold',
-  },
-  errorTextStyle: {
-    color: 'red',
-    textAlign: 'center',
-    fontSize: 14,
-  },
-  successTextStyle: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 18,
-    padding: 30,
-  },
-});
