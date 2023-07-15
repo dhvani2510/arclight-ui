@@ -19,6 +19,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import Loader from './Components/Loader';
 import AppStyles from '../styles/shared-styles';
+import RegisterScreenStyles from '../styles/RegisterScreenStyles';
+import LoginScreenStyles from '../styles/LoginScreenStyles';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -74,7 +76,7 @@ const LoginScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.mainBody}>
+    <View style={LoginScreenStyles.mainBody}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -87,7 +89,7 @@ const LoginScreen = ({navigation}) => {
           <KeyboardAvoidingView enabled>
             <View style={{alignItems: 'center'}}>
               <Image
-                source={require('../Image/logo.jpg')}
+                source={require('../Image/arclight.png')}
                 style={{
                   width: '200%',
                   height: 250,
@@ -96,9 +98,9 @@ const LoginScreen = ({navigation}) => {
                 }}
               />
             </View>
-            <View style={styles.SectionStyle}>
+            <View style={AppStyles.SectionStyle}>
               <TextInput
-                style={styles.inputStyle}
+                style={AppStyles.inputStyle}
                 onChangeText={(UserEmail) =>
                   setUserEmail(UserEmail)
                 }
@@ -115,9 +117,9 @@ const LoginScreen = ({navigation}) => {
                 blurOnSubmit={false}
               />
             </View>
-            <View style={styles.SectionStyle}>
+            <View style={AppStyles.SectionStyle}>
               <TextInput
-                style={styles.inputStyle}
+                style={AppStyles.inputStyle}
                 onChangeText={(UserPassword) =>
                   setUserPassword(UserPassword)
                 }
@@ -133,7 +135,7 @@ const LoginScreen = ({navigation}) => {
               />
             </View>
             {errortext != '' ? (
-              <Text style={styles.errorTextStyle}>
+              <Text style={AppStyles.errorTextStyle}>
                 {errortext}
               </Text>
             ) : null}
@@ -141,12 +143,12 @@ const LoginScreen = ({navigation}) => {
               style={AppStyles.buttonStyle}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
-              <Text style={styles.buttonTextStyle}>LOGIN</Text>
+              <Text style={AppStyles.buttonTextStyle}>Login</Text>
             </TouchableOpacity>
             <Text
-              style={styles.registerTextStyle}
+              style={LoginScreenStyles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>
-              New Here ? Register
+              New to Arclight ? Join Now
             </Text>
           </KeyboardAvoidingView>
         </View>
@@ -156,59 +158,3 @@ const LoginScreen = ({navigation}) => {
 };
 export default LoginScreen;
 
-const styles = StyleSheet.create({
-  mainBody: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#FFF',
-    alignContent: 'center',
-  },
-  SectionStyle: {
-    flexDirection: 'row',
-    height: 40,
-    marginTop: 20,
-    marginLeft: 35,
-    marginRight: 35,
-    margin: 10,
-  },
-  buttonStyle: {
-    backgroundColor: '#E9C508',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#E9C508',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 20,
-    marginBottom: 25,
-  },
-  buttonTextStyle: {
-    color: '#FFFFFF',
-    paddingVertical: 10,
-    fontSize: 16,
-  },
-  inputStyle: {
-    flex: 1,
-    color: 'white',
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
-    borderRadius: 30,
-    borderColor: '#dadae8',
-  },
-  registerTextStyle: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14,
-    alignSelf: 'center',
-    padding: 10,
-  },
-  errorTextStyle: {
-    color: 'red',
-    textAlign: 'center',
-    fontSize: 14,
-  },
-});
