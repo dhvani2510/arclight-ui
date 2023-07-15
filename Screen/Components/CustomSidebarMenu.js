@@ -77,7 +77,7 @@ const stylesSidebar = StyleSheet.create({
   },
   profileHeader: {
     flexDirection: 'row',
-    backgroundColor: '#307ecc',
+    backgroundColor: 'gold',
     padding: 15,
     textAlign: 'center',
   },
