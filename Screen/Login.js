@@ -39,22 +39,18 @@ const LoginScreen = ({navigation}) => {
       return;
     }
     setLoading(true);
-    let dataToSend = {email: userEmail, password: userPassword};
-    let formBody = [];
-    for (let key in dataToSend) {
-      let encodedKey = encodeURIComponent(key);
-      let encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join('&');
+    let dataToSend = JSON.stringify({
+      email: userEmail,
+      password: userPassword
+    });
 
-    fetch('http://localhost:3000/api/user/login', {
+    fetch('https://arclight.iverique.com/api/v1/auth/login', {
       method: 'POST',
-      body: formBody,
+      body: dataToSend,
       headers: {
         //Header Defination
         'Content-Type':
-        'application/x-www-form-urlencoded;charset=UTF-8',
+        'application/json;charset=UTF-8',
       },
     })
       .then((response) => response.json())
@@ -63,13 +59,11 @@ const LoginScreen = ({navigation}) => {
         setLoading(false);
         console.log(responseJson);
         // If server response message same as Data Matched
-        if (responseJson.status === 'success') {
-          AsyncStorage.setItem('user_id', responseJson.data.email);
-          console.log(responseJson.data.email);
+        if (responseJson.data != null) {
+          AsyncStorage.setItem('user_id', responseJson.data.token);
           navigation.replace('DrawerNavigationRoutes');
         } else {
-          setErrortext(responseJson.msg);
-          console.log('Please check your email id or password');
+          setErrortext(responseJson.message);
         }
       })
       .catch((error) => {
