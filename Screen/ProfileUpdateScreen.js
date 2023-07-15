@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import DateField from 'react-native-datefield';
+
 
 const ProfileUpdateScreen = () => {
   const profile = {
-    name: 'Jane Doe',
+    firstName: 'Jane',
+    lastName: 'Doe',
     email: 'jane.doe@example.com',
-    bio: 'Software engineer and cat lover',
+    date: '2020-05-20',
     avatar: 'https://example.com/jane-doe-avatar.png',
   }
-  const [name, setName] = useState(profile.name);
+  const [firstName, setFirstName] = useState(profile.firstName);
+  const [lastName, setLastName] = useState(profile.lastName);
   const [email, setEmail] = useState(profile.email);
-  const [bio, setBio] = useState(profile.bio);
   const [avatar, setAvatar] = useState(profile.avatar);
+  const [date, setDate] = useState(profile.date);
 
   const handleSubmit = () => {
-
+    console.log("profile updated");
   }
 
   return (
@@ -29,29 +33,38 @@ const ProfileUpdateScreen = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.form}>
-        <Text style={styles.label}>Name</Text>
-        <TextInput editable="false"
+        <Text style={styles.label}>First Name</Text>
+        <TextInput
           style={styles.input}
-          placeholder="Enter Name"
-          value={name}
-          onChangeText={setName}
+          placeholder="Enter First Name"
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+        <Text style={styles.label}>Last Name</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder="Enter Last Name"
+          value={lastName}
+          onChangeText={setLastName}
         />
         <Text style={styles.label}>Email</Text>
-        <TextInput
+        <TextInput editable={false}
           style={styles.input}
           placeholder="Enter Email"
           value={email}
           onChangeText={setEmail}
         />
-        <Text style={styles.label}>Bio</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Bio"
-          value={bio}
-          onChangeText={setBio}
-        />
-        <TouchableOpacity style={styles.button} onPress={() => handleSubmit({name, email, bio, avatar})}>
-          <Text style={styles.buttonText}>Submit</Text>
+      
+      <Text style={styles.label}>Date of Birth</Text>
+      <DateField
+        onSubmit={setDate}
+        // defaultValue={date}
+        styleInput={{ fontSize: 15 }}
+        containerStyle={{ marginVertical: 20 }}
+      />
+
+        <TouchableOpacity style={styles.button} onPress={() => handleSubmit({firstName, lastName, email, date, avatar})}>
+          <Text style={styles.buttonText}>Update</Text>
         </TouchableOpacity>
       </View>
 
@@ -80,7 +93,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#1E90FF',
+    backgroundColor: 'gold',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -88,6 +101,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
+    textAlign: 'center',
   },
   avatarContainer: {
     marginTop: 20,
