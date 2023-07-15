@@ -93,7 +93,8 @@ const RegisterScreen = (props) => {
           console.log(
             'Registration Successful. Please Login to proceed'
           );
-          navigation.replace('DrawerNavigationRoutes');
+          props.navigation.replace('DrawerNavigationRoutes');
+          props.navigation.navigate("ProfileScreen");
         } else {
           setErrortext(responseJson.message);
         }
