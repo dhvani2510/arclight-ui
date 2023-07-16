@@ -7,6 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from './Screen/SplashScreen';
 import LoginScreen from './Screen/Login';
 import RegisterScreen from './Screen/RegisterScreen';
+import ProfileUpdateScreen from './Screen/ProfileUpdateScreen';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
 const Stack = createStackNavigator();
@@ -25,6 +26,21 @@ const Auth = () => {
         component={RegisterScreen}
         options={{
           title: 'Sign Up', //Set Header Title
+          headerStyle: {
+            backgroundColor: 'gold', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+            fontSize: 24,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ProfileUpdateScreen"
+        component={ProfileUpdateScreen}
+        options={{
+          title: 'Edit Profile', //Set Header Title
           headerStyle: {
             backgroundColor: 'gold', //Set Header color
           },
