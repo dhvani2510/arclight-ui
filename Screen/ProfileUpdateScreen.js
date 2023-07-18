@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import DateField from 'react-native-datefield';
-import RNPickerSelect from 'react-native-picker-select';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import ProfileUpdateScreenStyles from '../styles/ProfileUpdateScreenStyles';
 
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import SelectDropdown from 'react-native-select-dropdown'
 const ProfileUpdateScreen = () => {
   const profile = {
     firstName: 'Jane',
@@ -19,10 +19,26 @@ const ProfileUpdateScreen = () => {
   const [avatar, setAvatar] = useState(profile.avatar);
   const [date, setDate] = useState(profile.date);
   const [primarylanguage, setPrimaryLanguage] = useState(profile.primarylanguage);
+  const [secondaryLangauge, setSecondaryLanguage] = useState(profile.secondaryLangauge);
 
   const handleSubmit = () => {
     console.log("profile updated");
   }
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    date = new Date(date);
+    setDate(date.toISOString().split('T')[0]);
+    hideDatePicker();
+  };
 
   return (
     <View style={ProfileUpdateScreenStyles.container}>
@@ -65,24 +81,30 @@ const ProfileUpdateScreen = () => {
             onChangeText={setPrimaryLanguage}
           />
           <Text style={ProfileUpdateScreenStyles.label}>Secondary Language</Text>
-        <RNPickerSelect
-        
-            style={ProfileUpdateScreenStyles.input}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'French', value: 'french' },
-                { label: 'Hindi', value: 'hindi' },
-                { label: 'None', value: 'none' },
-            ]}
-        />
+          <SelectDropdown
+            buttonStyle={ProfileUpdateScreenStyles.selectInput}
+            defaultButtonText='Select Secondary language'
+            data={['french', 'hindi', 'none']}
+            value={secondaryLangauge}
+            onConfirm={setSecondaryLanguage}
+          />
         <Text style={ProfileUpdateScreenStyles.label}>Date of Birth</Text>
-        <DateField
-          onSubmit={setDate}
-          // defaultValue={date}
-          styleInput={{ fontSize: 15 }}
-          containerStyle={{ marginVertical: 20 }}
-        />
-
+        <TouchableOpacity onPress={showDatePicker}>
+          <TextInput
+            onKeyPress={() => {return null;}}
+            style={ProfileUpdateScreenStyles.input}
+            value={date}
+            onTouchEnd={showDatePicker}
+            showSoftInputOnFocus={false}
+          />
+           <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            maximumDate={new Date(Date.now())}
+          />
+        </TouchableOpacity>
         <TouchableOpacity style={ProfileUpdateScreenStyles.button} onPress={() => handleSubmit({firstName, lastName, email, date, avatar})}>
           <Text style={ProfileUpdateScreenStyles.buttonText}>Update</Text>
         </TouchableOpacity>

@@ -1,6 +1,15 @@
 import { StyleSheet } from "react-native";
 
 const ProfileUpdateScreenStyles = StyleSheet.create({
+    selectInput: {
+      borderColor: 'gold',
+      borderWidth: 1,
+      borderRadius: 30,
+      // padding: 8,
+      fontSize: 14,
+      width: 'auto',
+      textAlign: 'left',
+    },
     container: {
       flex: 1,
       alignItems: 'center',

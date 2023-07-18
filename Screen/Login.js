@@ -4,7 +4,6 @@
 // Import React and Component
 import React, {useState, createRef} from 'react';
 import {
-  StyleSheet,
   TextInput,
   View,
   Text,
@@ -19,7 +18,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import Loader from './Components/Loader';
 import AppStyles from '../styles/shared-styles';
-import RegisterScreenStyles from '../styles/RegisterScreenStyles';
 import LoginScreenStyles from '../styles/LoginScreenStyles';
 
 const LoginScreen = ({navigation}) => {
@@ -30,7 +28,7 @@ const LoginScreen = ({navigation}) => {
 
   const passwordInputRef = createRef();
 
-  const handleSubmitPress = () => {
+  async function handleSubmitPress() {
     setErrortext('');
     if (!userEmail) {
       alert('Please fill Email');
@@ -59,10 +57,9 @@ const LoginScreen = ({navigation}) => {
       .then((responseJson) => {
         //Hide Loader
         setLoading(false);
-        console.log(responseJson);
         // If server response message same as Data Matched
-        if (responseJson.data != null) {
-          AsyncStorage.setItem('user_id', responseJson.data.token);
+        if (responseJson.status == 200) {
+          AsyncStorage.setItem('token', responseJson.data.token);
           navigation.replace('DrawerNavigationRoutes');
         } else {
           setErrortext(responseJson.message);
