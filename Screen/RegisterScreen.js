@@ -1,19 +1,5 @@
-// Example of Splash, Login and Sign Up in React Native
-// https://aboutreact.com/react-native-login-and-signup/
-
-// Import React and Component
 import React, {useState, createRef} from 'react';
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  Image,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { TextInput, View, Text, Image, KeyboardAvoidingView, Keyboard, TouchableOpacity, ScrollView, } from 'react-native';
 
 import Loader from './Components/Loader';
 import AppStyles from '../styles/shared-styles'
@@ -37,7 +23,7 @@ const RegisterScreen = (props) => {
   const passwordInputRef = createRef();
   const confirmpasswordInputRef = createRef();
 
-  const handleSubmitButton = () => {
+  const handleSubmitButton = async() => {
     setErrortext('');
     if (!userFirstName) {
       alert('Please fill First Name');
@@ -73,7 +59,7 @@ const RegisterScreen = (props) => {
         password: userPassword
       });
 
-    fetch('https://arclight.iverique.com/api/v1/auth/register', {
+    await fetch('https://arclight.iverique.com/api/v1/auth/register', {
       method: 'POST',
       body: dataToSend,
       headers: {
@@ -86,15 +72,12 @@ const RegisterScreen = (props) => {
       .then((responseJson) => {
         //Hide Loader
         setLoading(false);
-        console.log(responseJson);
         // If server response message same as Data Matched
         if (responseJson.status == 200) {
           setIsRegistraionSuccess(true);
           console.log(
             'Registration Successful. Please Login to proceed'
           );
-          props.navigation.replace('DrawerNavigationRoutes');
-          props.navigation.navigate("ProfileScreen");
         } else {
           setErrortext(responseJson.message);
         }

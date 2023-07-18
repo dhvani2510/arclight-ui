@@ -1,24 +1,33 @@
-// Example of Splash, Login and Sign Up in React Native
-// https://aboutreact.com/react-native-login-and-signup/
-
-// Import React and Component
 import React, {useState, createRef} from 'react';
-import {
-  TextInput,
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Keyboard,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-} from 'react-native';
-
+import { TextInput, View, Text, ScrollView, Image, Keyboard, TouchableOpacity, KeyboardAvoidingView, } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Loader from './Components/Loader';
 import AppStyles from '../styles/shared-styles';
 import LoginScreenStyles from '../styles/LoginScreenStyles';
+import ProfileUpdateScreen from './ProfileUpdateScreen';
+
+async function loginUser(credentials){
+  return fetch('https://arclight.iverique.com/api/v1/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: credentials
+  })
+    .then(data => data.json())
+}
+
+async function getUserProfle(accesstoken){
+  return fetch('https://arclight.iverique.com/api/v1/users/me', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ accesstoken
+    },
+  })
+    .then(data => data.json())
+}
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -28,7 +37,7 @@ const LoginScreen = ({navigation}) => {
 
   const passwordInputRef = createRef();
 
-  async function handleSubmitPress() {
+  const handleSubmitPress = async e => {
     setErrortext('');
     if (!userEmail) {
       alert('Please fill Email');
@@ -44,36 +53,21 @@ const LoginScreen = ({navigation}) => {
       password: userPassword
     });
 
-    fetch('https://arclight.iverique.com/api/v1/auth/login', {
-      method: 'POST',
-      body: dataToSend,
-      headers: {
-        //Header Defination
-        'Content-Type':
-        'application/json;charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        //Hide Loader
-        setLoading(false);
-        // If server response message same as Data Matched
-        if (responseJson.status == 200) {
-          AsyncStorage.setItem('token', responseJson.data.token);
-          navigation.replace('DrawerNavigationRoutes');
-        } else {
-          setErrortext(responseJson.message);
-        }
-      })
-      .catch((error) => {
-        //Hide Loader
-        setLoading(false);
-        console.error(error);
-      });
+    const response = await loginUser(dataToSend);
+    if(response.status == 200) {
+      setLoading(false);
+      let profile = await getUserProfle(response.data.token);
+      AsyncStorage.setItem("access-token", response.data.token);
+      AsyncStorage.setItem("user", JSON.stringify(profile.data));
+      navigation.replace('DrawerNavigationRoutes');
+      ProfileUpdateScreen.bind(profile, JSON.parse(profile.data));
+    }
+    else
+      setErrortext(response.message);
   };
 
   return (
-    <View style={LoginScreenStyles.mainBody}>
+   <View style={LoginScreenStyles.mainBody}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"

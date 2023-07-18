@@ -4,22 +4,45 @@ import ProfileUpdateScreenStyles from '../styles/ProfileUpdateScreenStyles';
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import SelectDropdown from 'react-native-select-dropdown'
+import AsyncStorage from '@react-native-community/async-storage';
+
 const ProfileUpdateScreen = () => {
-  const profile = {
-    firstName: 'Jane',
-    lastName: 'Doe',
-    email: 'jane.doe@example.com',
-    date: '2020-05-20',
-    avatar: 'https://example.com/jane-doe-avatar.png',
-    primarylanguage: "English",
+  useEffect(() => {
+    let user = AsyncStorage.getItem("user")
+    .then((res) => {
+      user = JSON.parse(res);
+      setProfile(user);
+    });
+  }, [])
+
+  const [profile, setProfile] = React.useState([]); 
+  const handleFirstNameChange = (value) => {
+    setProfile({
+      ...profile,
+      firstName: value
+    });
   }
-  const [firstName, setFirstName] = useState(profile.firstName);
-  const [lastName, setLastName] = useState(profile.lastName);
-  const [email, setEmail] = useState(profile.email);
-  const [avatar, setAvatar] = useState(profile.avatar);
-  const [date, setDate] = useState(profile.date);
-  const [primarylanguage, setPrimaryLanguage] = useState(profile.primarylanguage);
-  const [secondaryLangauge, setSecondaryLanguage] = useState(profile.secondaryLangauge);
+
+  const handleLastNameChange = (value) => {
+    setProfile({
+      ...profile,
+      lastName: value
+    });
+  }
+
+  const handleSecondaryLanguageChange = (value) => {
+    setProfile({
+      ...profile,
+      secodaryLanguage: value
+    });
+  }
+
+  const handleBirthDateChange = (value) => {
+    setProfile({
+      ...profile,
+      birthDate: value
+    });
+  }
 
   const handleSubmit = () => {
     console.log("profile updated");
@@ -36,7 +59,7 @@ const ProfileUpdateScreen = () => {
 
   const handleConfirm = (date) => {
     date = new Date(date);
-    setDate(date.toISOString().split('T')[0]);
+    handleBirthDateChange(date.toISOString().split('T')[0]);
     hideDatePicker();
   };
 
@@ -56,44 +79,42 @@ const ProfileUpdateScreen = () => {
         <TextInput
           style={ProfileUpdateScreenStyles.input}
           placeholder="Enter First Name"
-          value={firstName}
-          onChangeText={setFirstName}
+          value={profile.firstName}
+          onChangeText={handleFirstNameChange}
         />
         <Text style={ProfileUpdateScreenStyles.label}>Last Name</Text>
         <TextInput 
           style={ProfileUpdateScreenStyles.input}
           placeholder="Enter Last Name"
-          value={lastName}
-          onChangeText={setLastName}
+          value={profile.lastName}
+          onChangeText={handleLastNameChange}
         />
         <Text style={ProfileUpdateScreenStyles.label}>Email</Text>
         <TextInput editable={false}
           style={ProfileUpdateScreenStyles.input}
           placeholder="Enter Email"
-          value={email}
-          onChangeText={setEmail}
+          value={profile.email}
         />
         <Text style={ProfileUpdateScreenStyles.label}>Primary Language</Text>
           <TextInput editable={false}
             style={ProfileUpdateScreenStyles.input}
             placeholder="Enter Primary Language"
-            value={primarylanguage}
-            onChangeText={setPrimaryLanguage}
+            value={'English'}
           />
           <Text style={ProfileUpdateScreenStyles.label}>Secondary Language</Text>
           <SelectDropdown
             buttonStyle={ProfileUpdateScreenStyles.selectInput}
             defaultButtonText='Select Secondary language'
             data={['french', 'hindi', 'none']}
-            value={secondaryLangauge}
-            onConfirm={setSecondaryLanguage}
+            value={profile.secodaryLanguage}
+            onConfirm={handleSecondaryLanguageChange}
           />
         <Text style={ProfileUpdateScreenStyles.label}>Date of Birth</Text>
         <TouchableOpacity onPress={showDatePicker}>
           <TextInput
             onKeyPress={() => {return null;}}
             style={ProfileUpdateScreenStyles.input}
-            value={date}
+            value={profile.birthDate}
             onTouchEnd={showDatePicker}
             showSoftInputOnFocus={false}
           />
@@ -105,7 +126,7 @@ const ProfileUpdateScreen = () => {
             maximumDate={new Date(Date.now())}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={ProfileUpdateScreenStyles.button} onPress={() => handleSubmit({firstName, lastName, email, date, avatar})}>
+        <TouchableOpacity style={ProfileUpdateScreenStyles.button} onPress={() => handleSubmit({profile})}>
           <Text style={ProfileUpdateScreenStyles.buttonText}>Update</Text>
         </TouchableOpacity>
       </View>
