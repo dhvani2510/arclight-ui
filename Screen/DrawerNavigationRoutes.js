@@ -7,10 +7,10 @@ import SettingsScreen from './DrawerScreens/SettingsScreen';
 import ProfileUpdateScreen from './ProfileUpdateScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
-import BasicLearning from './DrawerScreens/HomeScreen';
-import Quiz from './DrawerScreens/HomeScreen';
-import FunFacts from './DrawerScreens/HomeScreen';
-import Scores from './DrawerScreens/HomeScreen';
+import BasicLearning from './DrawerScreens/BasicLearning';
+import Quiz from './DrawerScreens/Quiz';
+import FunFacts from './DrawerScreens/FunFacts';
+import Scores from './DrawerScreens/Scores';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
