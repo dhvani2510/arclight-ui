@@ -7,6 +7,10 @@ import SettingsScreen from './DrawerScreens/SettingsScreen';
 import ProfileUpdateScreen from './ProfileUpdateScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
+import BasicLearning from './DrawerScreens/HomeScreen';
+import Quiz from './DrawerScreens/HomeScreen';
+import FunFacts from './DrawerScreens/HomeScreen';
+import Scores from './DrawerScreens/HomeScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -86,6 +90,103 @@ const ProfileScreenStack = ({navigation}) => {
   );
 };
 
+
+const BasicLearningStack = ({navigation}) => {
+  return (
+    <Stack.Navigator initialRouteName="BasicLearning">
+      <Stack.Screen
+        name="BasicLearning"
+        component={BasicLearning}
+        options={{
+          title: 'Basic Learning', //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerHeader navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: 'gold', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const QuizStack = ({navigation}) => {
+  return (
+    <Stack.Navigator initialRouteName="Quiz">
+      <Stack.Screen
+        name="Quiz"
+        component={Quiz}
+        options={{
+          title: 'Quiz', //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerHeader navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: 'gold', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const FunFactsStack = ({navigation}) => {
+  return (
+    <Stack.Navigator initialRouteName="FunFacts">
+      <Stack.Screen
+        name="FunFacts"
+        component={FunFacts}
+        options={{
+          title: 'Fun Facts', //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerHeader navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: 'gold', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ScoresStack = ({navigation}) => {
+  return (
+    <Stack.Navigator initialRouteName="Scores">
+      <Stack.Screen
+        name="Scores"
+        component={Scores}
+        options={{
+          title: 'Score Board', //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerHeader navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: 'gold', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const DrawerNavigatorRoutes = (props) => {
   return (
     <Drawer.Navigator
@@ -98,19 +199,39 @@ const DrawerNavigatorRoutes = (props) => {
         },
         headerShown: false}}
       drawerContent={CustomSidebarMenu}>
-        <Drawer.Screen
+      <Drawer.Screen
+        name="homeScreenStack"
+        options={{drawerLabel: 'Home'}}
+        component={HomeScreenStack}
+      />
+      <Drawer.Screen
+        name="BasicLearningStack"
+        options={{drawerLabel: 'Basic Learning'}}
+        component={BasicLearningStack}
+      />
+      <Drawer.Screen
+        name="QuizStack"
+        options={{drawerLabel: 'Quiz'}}
+        component={QuizStack}
+      />
+      <Drawer.Screen
+        name="FunFactsStack"
+        options={{drawerLabel: 'Fun Facts'}}
+        component={FunFactsStack}
+      />
+      <Drawer.Screen
+        name="ScoresStack"
+        options={{drawerLabel: 'Scores'}}
+        component={ScoresStack}
+      />
+      <Drawer.Screen
         name="profileScreenStack"
         options={{drawerLabel: 'Profile'}}
         component={ProfileScreenStack}
       />
       <Drawer.Screen
-        name="homeScreenStack"
-        options={{drawerLabel: 'Home Screen'}}
-        component={HomeScreenStack}
-      />
-      <Drawer.Screen
         name="settingScreenStack"
-        options={{drawerLabel: 'Setting Screen'}}
+        options={{drawerLabel: 'Settings'}}
         component={SettingScreenStack}
       />
     </Drawer.Navigator>
