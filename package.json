@@ -38,7 +38,10 @@
     "react-native-screens": "^3.22.1",
     "react-native-select-dropdown": "^3.3.4",
     "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
+    "redux": "^4.2.1",
+    "redux-mock-store": "^1.5.4",
     "sass": "^1.63.6"
   },
   "devDependencies": {
