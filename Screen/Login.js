@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Loader from './Components/Loader';
 import AppStyles from '../styles/shared-styles';
 import LoginScreenStyles from '../styles/LoginScreenStyles';
-import ProfileUpdateScreen from './ProfileUpdateScreen';
+import ProfileUpdateScreen from './DrawerScreens/ProfileUpdateScreen';
 
 async function loginUser(credentials){
   return fetch('https://arclight.iverique.com/api/v1/auth/login', {

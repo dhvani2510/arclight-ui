@@ -1,49 +1,37 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import {View, Text, SafeAreaView, Image, StyleSheet} from 'react-native';
-import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-
-
-
-
-
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
 const BasicLearning = () => {
     const categories = [
         {
           id: 1,
           name: "Numbers",
-          // imageURL: require('../../Image/basiclearning.png')
         },
-      
         {
           id: 2,
           name: "Shapes",
-          // imageURL: require('../../Image/quiz.png')
         },
-      
         {
           id: 3,
           name: "Animals",
-          // imageURL: require('../../Image/ff.png')
         }
       ];
       
     const SCREEN_HEIGHT = Dimensions.get("screen").height;
     const SCREEN_WIDTH = Dimensions.get("screen").width;
     const render = ({item}) => {
-    //const navigation = useNavigation();
   return (
     <TouchableOpacity
           style={styles.button}
-          onPress={handleButtonPress(item.id)}
+          onPress={() => handleButtonPress(item.id)}
         >
           <Text style={styles.buttonText}>{item.name}</Text>
         </TouchableOpacity>
   );
 }
     const handleButtonPress = (buttonText) => {
-        // Handle button press logic here
         console.log(`Button "${buttonText}" pressed`);
       }; 
   return (

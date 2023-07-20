@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-import ProfileUpdateScreenStyles from '../styles/ProfileUpdateScreenStyles';
+import ProfileUpdateScreenStyles from '../../styles/ProfileUpdateScreenStyles';
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import SelectDropdown from 'react-native-select-dropdown'
