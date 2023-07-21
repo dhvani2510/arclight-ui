@@ -16,11 +16,6 @@
     "ios": {
       "icon": "assets/images/icon.png"
     },
-    "splash": {
-      "image": "assets/images/splash.png",
-      "backgroundColor": "#f0f0f0",
-      "resizeMode": "cover"
-    },
     "userInterfaceStyle": "automatic",
     "extra": {
       "eas": {

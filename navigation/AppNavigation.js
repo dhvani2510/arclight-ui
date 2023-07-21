@@ -57,18 +57,17 @@ export default function AppNavigation() {
           options={{headerShown: false}}
         />
         {/* Auth Navigator: Include Login and Signup */}
-        { isUserAuthenticated ? (<Stack.Screen
+        <Stack.Screen
           name="Auth"
           component={Auth}
           options={{headerShown: false}}
-        />)
-        : (<Stack.Screen
+        />
+        <Stack.Screen
           name="DrawerNavigationRoutes"
           component={DrawerNavigation}
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
-        />)
-      }
+        />
       </Stack.Navigator>
     </NavigationContainer>
     );
