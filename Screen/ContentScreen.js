@@ -20,8 +20,6 @@ const CategoryScreen = ({ route }) => {
   // Make an API call to fetch data for the selected category
   const fetchData = async () => {
     const access_token = await AsyncStorage.getItem('access-token');
-    console.warn("token: " +access_token);
-    console.warn("category: " +category);
       return fetch('https://arclight.iverique.com/api/v1/basic-learning/category/'+category , {
         method: 'GET',
         headers: {
