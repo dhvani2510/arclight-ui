@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, ActivityIndicator, Button} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {View, ActivityIndicator, Button} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Image } from 'react-native';
+import QuizQuestionItem from '../Components/QuizQuestionItem';
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([]);
@@ -24,23 +23,34 @@ const Quiz = () => {
             })
             .then(data => data.json())
             .then(response => {
-                console.warn("response: " + JSON.stringify(response));
                 setQuestions(response.data);
                 setLoading(false);
             });
     };
 
-    const displayNextItem = () => {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
-    };
     
-    const handleAnswerSelection = (questionId, selectedOption) => {
-        const newAnswer = { id: questionId, option: selectedOption };
-        setAnswers([...answers, newAnswer]);
+    function callBackAnswers(data)  {
+      console.warn("data: " + JSON.stringify(data));
+      setAnswers((prevAnswers) => [...prevAnswers,data]);
+      console.warn("updatedData: " + JSON.stringify(answers));
+
+    }
+
+    const handleNext = () => {
+      if (currentIndex < questions.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      }
+
+    };
+  
+    const handlePrevious = () => {
+      if (currentIndex > 0) {
+        setCurrentIndex(currentIndex - 1);
+      }
     };
     
     const submitAnswers = () => {
-        console.log('Answers:', answers);
+        console.warn('Answers:', answers);
     };
     
     if (loading) {
@@ -53,42 +63,20 @@ const Quiz = () => {
 
     return (
         <View>
-          {currentIndex < questions.length ? (
-            <View>
-              <Image source={{ uri: 'https://arclight.iverique.com'+ questions[currentIndex].image }} style={{ width: 100, height: 100 }} />
-            {questions[currentIndex].choices.map((option) => (
-                <TouchableOpacity
-                  key={option.id}
-                  onPress={() => handleAnswerSelection(questions[currentIndex].id, option.description)}
-                >
-                  <Text>{option.description}</Text>
-                </TouchableOpacity>
-              ))}
-            {/* Display other data fields as needed */}
-            <Button title='next' onPress={displayNextItem}>
-              Next
+           <QuizQuestionItem items={questions} answers={answers} 
+            currentIndex={currentIndex}
+            handleAnswerSlectAction={callBackAnswers}/>
+          <View style={{display:'flex', gap:10}}>
+            <Button title='Previous' onPress={handlePrevious} disabled={currentIndex === 0}>
+              Previous
             </Button>
+            <Button title="Next" onPress={handleNext} disabled={currentIndex === questions.length - 1}>
+              Next
+            </Button> 
           </View>
-        ) : (
-          <Text>No more data to display.</Text>
-        )}
-          {/* {questions.map((question) => (
-            <View key={question.id}>
-
-              <Text ></Text>
-              {question.choices.map((option) => (
-                <TouchableOpacity
-                  key={option.id}
-                  onPress={() => handleAnswerSelection(question.id, option.description)}
-                >
-                  <Text>{option.description}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          ))}
-          <TouchableOpacity onPress={submitAnswers}>
-            <Text>Submit Answers</Text>
-          </TouchableOpacity> */}
+          <Button title="Submit" onPress={submitAnswers} style={{display: (currentIndex == questions.length-1) ? 'flex' : 'none' }} disabled={currentIndex != questions.length - 1}>
+              Submit
+          </Button> 
         </View>
     );
 };

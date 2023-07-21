@@ -38,7 +38,6 @@ const CategoryScreen = ({ route }) => {
   useEffect(async() => {
     fetchAccessToken();
     const response = fetchData();
-    console.warn(JSON.stringify(response));
   }, [category]);
 
   return (
