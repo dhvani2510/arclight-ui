@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import {View, Text, SafeAreaView, Image, StyleSheet} from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
-const BasicLearning = () => {
+const BasicLearning = ({navigation}) => {
     const categories = [
         {
           id: 1,
@@ -11,10 +11,22 @@ const BasicLearning = () => {
         },
         {
           id: 2,
-          name: "Shapes",
+          name: "Colors",
         },
         {
           id: 3,
+          name: "Days",
+        },
+        {
+          id: 4,
+          name: "Months",
+        },
+        {
+          id: 5,
+          name: "Shapes",
+        },
+        {
+          id: 6,
           name: "Animals",
         }
       ];
@@ -32,7 +44,8 @@ const BasicLearning = () => {
   );
 }
     const handleButtonPress = (buttonText) => {
-        console.log(`Button "${buttonText}" pressed`);
+      let category = categories.find(x => x.id == buttonText).name;
+        navigation.navigate('ContentScreen', {category});
       }; 
   return (
     <View style={styles.container}>
@@ -67,7 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   imagecontainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff',

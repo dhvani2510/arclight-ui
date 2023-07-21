@@ -8,6 +8,7 @@ import FunFacts from '../Screen/DrawerScreens/FunFacts';
 import Scores from '../Screen/DrawerScreens/Scores';
 import NavigationDrawerHeader from '../Screen/Components/NavigationDrawerHeader';
 import CustomSliderMenu from '../Screen/Components/CustomSidebarMenu';
+import ContentScreen from '../Screen/ContentScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,7 +28,7 @@ const DrawerNavigation = (props) => {
     }
   };
     return (
-        <Drawer.Navigator 
+        <Drawer.Navigator  initialRouteName='Home'
         screenOptions={{
           activeTintColor: '#fff',
           color: '#fff',
@@ -43,6 +44,14 @@ const DrawerNavigation = (props) => {
           <Drawer.Screen options={headerOptions} name="FunFacts" component={FunFacts} />
           <Drawer.Screen options={headerOptions} name="Scores" component={Scores} />
           <Drawer.Screen options={headerOptions} name="Profile" component={ProfileUpdateScreen} />
+          <Drawer.Screen
+          name="ContentScreen"
+          component={ContentScreen}
+          options={{
+            headerShown: false,
+            drawerItemStyle: {display: 'none'}
+          }}
+        />
         </Drawer.Navigator>
       );
 }

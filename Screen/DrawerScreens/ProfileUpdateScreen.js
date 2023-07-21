@@ -8,7 +8,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const ProfileUpdateScreen = () => {
   useEffect(() => {
-    let user = AsyncStorage.getItem("user")
+    AsyncStorage.getItem("access-token")
+    .then((value) => {
+      accessToken = value;
+      setToken(accessToken);
+    });
+    AsyncStorage.getItem("user")
     .then((res) => {
       user = JSON.parse(res);
       setProfile(user);
@@ -16,12 +21,27 @@ const ProfileUpdateScreen = () => {
   }, [])
 
   const [profile, setProfile] = React.useState([]); 
+  const [loading, setLoading] = useState(false);
+  let [token,setToken] = useState(null);
+
   const handleFirstNameChange = (value) => {
     setProfile({
       ...profile,
       firstName: value
     });
   }
+
+  async function updateProfile(data)  {
+    console.log(token);
+    return fetch('https://arclight.iverique.com/api/v1/users/profile', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer '+ token
+    },
+    body: data
+  })
+  .then(data => data.json());
+}
 
   const handleLastNameChange = (value) => {
     setProfile({
@@ -33,19 +53,38 @@ const ProfileUpdateScreen = () => {
   const handleSecondaryLanguageChange = (value) => {
     setProfile({
       ...profile,
-      secodaryLanguage: value
+      secondaryLanguage: value
     });
   }
 
   const handleBirthDateChange = (value) => {
     setProfile({
       ...profile,
-      birthDate: value
+      birthDate: value.toString()
     });
   }
 
-  const handleSubmit = () => {
-    console.log("profile updated");
+  const handleSubmit = async(profile) => {
+    setLoading(true);
+    let data = new FormData();
+    data.append("firstName", profile.firstName);
+    data.append("lastName", profile.lastName);
+    data.append("secondaryLanguage", profile.secondaryLanguage);
+    data.append("birthDate", profile.birthDate);
+
+    if(profile.Image) {
+      data.append("image", profile.image);
+    }
+
+    const response = await updateProfile(data);
+    console.log(response);
+    setLoading(false);
+    if(response.status == 200) {
+      AsyncStorage.setItem('user', JSON.stringify(response.data));
+      setProfile(response.data);
+    }
+    else
+      console.error(response.message);
   }
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -105,9 +144,9 @@ const ProfileUpdateScreen = () => {
           <SelectDropdown
             buttonStyle={ProfileUpdateScreenStyles.selectInput}
             defaultButtonText='Select Secondary language'
-            data={['french', 'hindi', 'none']}
-            value={profile.secodaryLanguage}
-            onConfirm={handleSecondaryLanguageChange}
+            data={['French', 'Hindi']}
+            defaultValue={profile.secondaryLanguage}
+            onSelect={handleSecondaryLanguageChange}
           />
         <Text style={ProfileUpdateScreenStyles.label}>Date of Birth</Text>
         <TouchableOpacity onPress={showDatePicker}>
@@ -126,7 +165,7 @@ const ProfileUpdateScreen = () => {
             maximumDate={new Date(Date.now())}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={ProfileUpdateScreenStyles.button} onPress={() => handleSubmit({profile})}>
+        <TouchableOpacity style={ProfileUpdateScreenStyles.button} onPress={() => handleSubmit(profile)}>
           <Text style={ProfileUpdateScreenStyles.buttonText}>Update</Text>
         </TouchableOpacity>
       </View>
