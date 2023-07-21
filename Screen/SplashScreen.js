@@ -19,14 +19,12 @@ const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
-      //Check if user_id is set or not
-      //If not then send for Authentication
-      //else send to Home Screen
-      AsyncStorage.getItem('access-token').then((value) =>
-        navigation.replace(
-          value === null ? 'Auth' : 'DrawerNavigationRoutes'
-        ),
-      );
+      AsyncStorage.getItem('access-token').then((value) => {
+        if(value)
+          navigation.navigate('DrawerNavigationRoutes', {screen: 'Home'});
+        else
+          navigation.navigate('Auth', {screen: 'Login'});
+      });
     }, 3000);
   }, []);
 
