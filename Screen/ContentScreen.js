@@ -3,7 +3,7 @@ import { SafeAreaView, Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
-const CategoryScreen = ({ route }) => {
+const ContentScreen = ({ route }) => {
   const { category } = route.params;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -50,4 +50,4 @@ const CategoryScreen = ({ route }) => {
   );
 };
 
-export default CategoryScreen;
+export default ContentScreen;

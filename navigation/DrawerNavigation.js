@@ -45,7 +45,7 @@ const DrawerNavigation = (props) => {
           <Drawer.Screen options={headerOptions} name="Scores" component={Scores} />
           <Drawer.Screen options={headerOptions} name="Profile" component={ProfileUpdateScreen} />
           <Drawer.Screen
-          name="Content"
+          name="ContentScreen"
           component={ContentScreen}
           options={{
             headerShown: false,

@@ -45,7 +45,7 @@ const BasicLearning = ({navigation}) => {
 }
     const handleButtonPress = (buttonText) => {
       let category = categories.find(x => x.id == buttonText).name;
-        navigation.navigate('Content', {category});
+        navigation.navigate('ContentScreen', {category});
       }; 
   return (
     <View style={styles.container}>
