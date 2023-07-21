@@ -59,7 +59,7 @@ const LoginScreen = ({navigation}) => {
       let profile = await getUserProfle(response.data.token);
       AsyncStorage.setItem("access-token", response.data.token);
       AsyncStorage.setItem("user", JSON.stringify(profile.data));
-      navigation.replace('DrawerNavigationRoutes');
+      navigation.navigate('DrawerNavigationRoutes', {screen: 'Home'});
       ProfileUpdateScreen.bind(profile, JSON.parse(profile.data));
     }
     else
