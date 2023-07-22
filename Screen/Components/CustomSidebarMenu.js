@@ -48,6 +48,7 @@ const CustomSidebarMenu = (props) => {
                   text: 'Confirm',
                   onPress: () => {
                     AsyncStorage.clear();
+                    props.navigation.navigate('Auth');
                   },
                 },
               ],

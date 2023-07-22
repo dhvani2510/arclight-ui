@@ -17,11 +17,9 @@ const Scores = () => {
               },
               })
               .then(data => {
-                console.warn(JSON.stringify(data));
                 data.json();
               })
               .then(response => {
-                console.warn(JSON.stringify(response.data));
                   setQuestions(response.data);
                   setLoading(false);
               });

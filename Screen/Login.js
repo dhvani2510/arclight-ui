@@ -6,6 +6,7 @@ import Loader from './Components/Loader';
 import AppStyles from '../styles/shared-styles';
 import LoginScreenStyles from '../styles/LoginScreenStyles';
 import ProfileUpdateScreen from './DrawerScreens/ProfileUpdateScreen';
+import { useNavigation } from '@react-navigation/native';
 
 async function loginUser(credentials){
   return fetch('https://arclight.iverique.com/api/v1/auth/login', {
@@ -29,11 +30,12 @@ async function getUserProfle(accesstoken){
     .then(data => data.json())
 }
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
+  const navigation = useNavigation();
 
   const passwordInputRef = createRef();
 
@@ -58,7 +60,7 @@ const LoginScreen = ({navigation}) => {
       let profile = await getUserProfle(response.data.token);
       AsyncStorage.setItem("access-token", response.data.token);
       AsyncStorage.setItem("user", JSON.stringify(profile.data));
-      navigation.navigate('DrawerNavigationRoutes', {screen: 'Home'});
+      navigation.navigate('App');
       ProfileUpdateScreen.bind(profile, JSON.parse(profile.data));
     }
     else
