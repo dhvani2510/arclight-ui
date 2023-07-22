@@ -75,9 +75,6 @@ const RegisterScreen = (props) => {
         // If server response message same as Data Matched
         if (responseJson.status == 200) {
           setIsRegistraionSuccess(true);
-          console.log(
-            'Registration Successful. Please Login to proceed'
-          );
         } else {
           setErrortext(responseJson.message);
         }

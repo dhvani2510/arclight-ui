@@ -32,7 +32,6 @@ const ProfileUpdateScreen = () => {
   }
 
   async function updateProfile(data)  {
-    console.log(token);
     return fetch('https://arclight.iverique.com/api/v1/users/profile', {
     method: 'POST',
     headers: {
@@ -77,7 +76,6 @@ const ProfileUpdateScreen = () => {
     }
 
     const response = await updateProfile(data);
-    console.log(response);
     setLoading(false);
     if(response.status == 200) {
       AsyncStorage.setItem('user', JSON.stringify(response.data));
