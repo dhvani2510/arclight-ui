@@ -58,8 +58,6 @@ const Quiz = () => {
     const submitData = async(data) => {
       const access_token = await AsyncStorage.getItem('access-token');
       let dataToSend = {answers: data};
-      console.warn("token: " + access_token);
-      console.warn("amswers: "  + JSON.stringify(dataToSend));
       return fetch('https://arclight.iverique.com/api/v1/quiz/submit', {
         method: 'POST',
         headers: {
@@ -76,7 +74,6 @@ const Quiz = () => {
     const submitAnswers = async() => {
         setLoading(true);
         let response = await submitData(answers);
-        console.warn(JSON.stringify(response))
     };
 
     const currentQuestion = questions[currentIndex];

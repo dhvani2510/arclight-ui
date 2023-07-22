@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Button } from 'react-native-paper';
 import AppStyles from '../../styles/shared-styles';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -25,11 +24,7 @@ const FunFacts = () => {
     .then(data => data.json())
     .then(response => {
       
-      // console.log("ives" + JSON.stringify(response.data));
-      //console.log("result " + JSON.parse(response));
      response.data.description='Water boils at 100 degree celsius';
-     //console.warn(facts);
-
         setFacts(response.data);
         setLoading(false);
     });
