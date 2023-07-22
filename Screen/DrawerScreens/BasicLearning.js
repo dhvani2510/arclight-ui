@@ -35,39 +35,37 @@ const BasicLearning = ({navigation}) => {
     const SCREEN_WIDTH = Dimensions.get("screen").width;
     const render = ({item}) => {
   return (
-    <TouchableOpacity
-          style={styles.button}
-          onPress={() => handleButtonPress(item.id)}
-        >
-          <Text style={styles.buttonText}>{item.name}</Text>
-        </TouchableOpacity>
+    <TouchableOpacity style={styles.button}
+      onPress={() => handleButtonPress(item.id)}>
+      <Text style={styles.buttonText}>{item.name}</Text>
+    </TouchableOpacity>
   );
 }
-    const handleButtonPress = (buttonText) => {
-      let category = categories.find(x => x.id == buttonText).name;
-        navigation.navigate('ContentScreen', {category});
-      }; 
+
+const handleButtonPress = (buttonText) => {
+  let category = categories.find(x => x.id == buttonText).name;
+  navigation.navigate('ContentScreen', {category});
+};
+
   return (
     <View style={styles.container}>
-     <View style={styles.imagecontainer}>
-     <Image
-        source={require('../../Image/basiclearning.png')} // Replace with the path to your logo image
-        style={{height: SCREEN_HEIGHT/3, width: SCREEN_WIDTH-10}}
-      />
-    </View> 
-    
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{padding: 16}}>
-        <FlatList
-        contentContainerStyle={{justifyContent: 'space-between'}}
-        style={{marginTop:16}}
-        data={categories}
-        keyExtractor={item => item.id}
-        showsVerticalScrollIndicator={false}
-        renderItem={render}
-      />
-      </View>
-    </SafeAreaView>
+      <View style={styles.imagecontainer}>
+        <Image source={require('../../Image/basiclearning.png')} // Replace with the path to your logo image
+          style={{height: SCREEN_HEIGHT/3, width: SCREEN_WIDTH-10}}
+        />
+      </View>   
+      <SafeAreaView style={{flex: 1}}>
+        <View style={{padding: 16}}>
+          <FlatList
+            contentContainerStyle={{justifyContent: 'space-between'}}
+            style={{marginTop:16}}
+            data={categories}
+            keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
+            renderItem={render}
+          />
+        </View>
+      </SafeAreaView>
     </View>
   );
 };

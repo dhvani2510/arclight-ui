@@ -55,7 +55,6 @@ const LoginScreen = ({navigation}) => {
 
     const response = await loginUser(dataToSend);
     if(response.status == 200) {
-      setLoading(false);
       let profile = await getUserProfle(response.data.token);
       AsyncStorage.setItem("access-token", response.data.token);
       AsyncStorage.setItem("user", JSON.stringify(profile.data));
@@ -64,6 +63,7 @@ const LoginScreen = ({navigation}) => {
     }
     else
       setErrortext(response.message);
+    setLoading(false);
   };
 
   return (
