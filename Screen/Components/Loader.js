@@ -14,7 +14,6 @@ const Loader = (props) => {
       animationType={'none'}
       visible={loading}
       onRequestClose={() => {
-        loading = !loading;
       }}>
       <View style={styles.modalBackground}>
         <View style={styles.activityIndicatorWrapper}>
