@@ -37,7 +37,7 @@ const DrawerNavigation = (props) => {
             color: '#d8d8d8',
           }
         }}
-        drawerContent={CustomSliderMenu}>
+        >
           <Drawer.Screen options={headerOptions} name="Home" component={HomeScreen} />
           <Drawer.Screen options={headerOptions} name="BasicLearning" component={BasicLearning} />
           <Drawer.Screen options={headerOptions} name="Quiz" component={Quiz} />
