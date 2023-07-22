@@ -30,18 +30,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  image: {
-    width: 333,
-    height: 333,
+  questionText: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
-  option: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 10,
+  optionImage: {
+    width: 100,
+    height: 100,
+    margin: 10,
+    resizeMode: 'contain',
   },
   optionText: {
     fontSize: 20,
