@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {View, ActivityIndicator, Button} from 'react-native';
+import {View, ActivityIndicator, Button, Text, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import QuizQuestionItem from '../Components/QuizQuestionItem';
+import styles from '../../styles/QuizStyles';
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([]);
@@ -28,31 +29,61 @@ const Quiz = () => {
             });
     };
 
-    
-    function callBackAnswers(data)  {
-      console.warn("data: " + JSON.stringify(data));
-      setAnswers((prevAnswers) => [...prevAnswers,data]);
-      console.warn("updatedData: " + JSON.stringify(answers));
-
-    }
-
     const handleNext = () => {
       if (currentIndex < questions.length - 1) {
-        setCurrentIndex(currentIndex + 1);
+        setCurrentIndex((prevIndex) => prevIndex+1);
       }
-
     };
   
     const handlePrevious = () => {
       if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 1);
+        setCurrentIndex((prevIndex) => prevIndex-1);
       }
     };
-    
-    const submitAnswers = () => {
-        console.warn('Answers:', answers);
+
+    const handleAnswerSelection = (questionId, answer) => {
+      const existingAnswerIndex = answers.findIndex((item) => item.id === questionId);
+
+      if (existingAnswerIndex !== -1) {
+        setAnswers((prevAnswers) => {
+          const updatedAnswers = [...prevAnswers];
+          updatedAnswers[existingAnswerIndex] = { id: questionId, choiceId: answer.id };
+          return updatedAnswers;
+        });
+      }
+      else
+        setAnswers((prevAnswers) => [...prevAnswers, { id: questionId, choiceId: answer.id }]);
+    };
+
+    const submitData = async(data) => {
+      const access_token = await AsyncStorage.getItem('access-token');
+      let dataToSend = {answers: data};
+      console.warn("token: " + access_token);
+      console.warn("amswers: "  + JSON.stringify(dataToSend));
+      return fetch('https://arclight.iverique.com/api/v1/quiz/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ access_token
+        },
+        body: dataToSend
+      })
+      .then(data => {
+        return data.json();
+      })
     };
     
+    const submitAnswers = async() => {
+        setLoading(true);
+        let response = await submitData(answers);
+        console.warn(JSON.stringify(response))
+    };
+
+    const currentQuestion = questions[currentIndex];
+    const totalQuestions = questions.length;
+    const currentQuestionNumber = currentIndex + 1;
+    const quizProgress = (currentQuestionNumber / totalQuestions) * 100;
+
     if (loading) {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -62,22 +93,28 @@ const Quiz = () => {
     }
 
     return (
-        <View>
-           <QuizQuestionItem items={questions} answers={answers} 
-            currentIndex={currentIndex}
-            handleAnswerSlectAction={callBackAnswers}/>
-          <View style={{display:'flex', gap:10}}>
-            <Button title='Previous' onPress={handlePrevious} disabled={currentIndex === 0}>
-              Previous
-            </Button>
-            <Button title="Next" onPress={handleNext} disabled={currentIndex === questions.length - 1}>
-              Next
-            </Button> 
-          </View>
-          <Button title="Submit" onPress={submitAnswers} style={{display: (currentIndex == questions.length-1) ? 'flex' : 'none' }} disabled={currentIndex != questions.length - 1}>
-              Submit
-          </Button> 
+      <View style={styles.container}>
+        <View style={styles.topSection}>
+          <Text style={styles.questionNumber}>{`Question ${currentQuestionNumber} of ${totalQuestions}`}</Text>
+          <View style={styles.progressBarContainer}>
+            <View style={[styles.progressBar, { width: `${quizProgress}%` }]} />
+          </View>        
         </View>
+      <QuizQuestionItem question={currentQuestion}
+        selectedAnswer={answers[currentQuestion.id]} 
+        onAnswerSelection={(answer) => handleAnswerSelection(currentQuestion.id, answer)}
+      />
+       <View style={styles.buttons}>
+        <Button style={{color: 'green'}} title="Previous" onPress={handlePrevious} disabled={currentIndex === 0} />
+        {currentIndex === questions.length - 1 ? (
+          <TouchableOpacity style={styles.submitButton} onPress={submitAnswers}>
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
+        ) : (
+          <Button style={{color: 'green'}} title="Next" onPress={handleNext} />
+        )}
+      </View>
+      </View>
     );
 };
 

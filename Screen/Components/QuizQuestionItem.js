@@ -1,30 +1,23 @@
-import { useState } from 'react';
-import { Image } from 'react-native';
-import {View, Text, Button, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import styles from '../../styles/QuizStyles';
 
-const QuizQuestionItem = (props) => {
-  const {items, answers, currentIndex, handleAnswerSlectAction } = props;
-
-  const [answerList, setAnswerList] = useState(answers);
-  
-  const handleAnswerSelection = (id, selectedOption) => {
-      const newAnswer = { id: id, option: selectedOption };
-      setAnswerList([...answerList, newAnswer]);
-      console.warn("answerList: " + JSON.stringify(answerList));
-      handleAnswerSlectAction(answerList);
-
-  };
+const QuizQuestionItem = ({question, selectedAnswer, onAnswerSelection}) => {
     return (
-        <View>
-        <Image source={{ uri: 'https://arclight.iverique.com'+ items[currentIndex].image }} style={{ width: 100, height: 100 }} />
-      {items[currentIndex].choices.map((option) => (
+    <View style={styles.questionContainer}>
+      <Image source={{uri: 'https://arclight.iverique.com'+question.image}} style={styles.image} resizeMode="contain" />
+      <View style={styles.options}>
+        {question.choices.map((option, index) => (
           <TouchableOpacity
-            key={option.id}
-            onPress={() => handleAnswerSelection(items[currentIndex].id, option.description)}
-          >
-            <Text>{option.description}</Text>
-          </TouchableOpacity>
+          key={index}
+          style={[styles.option, selectedAnswer === option && styles.selectedOption]}
+          onPress={() => onAnswerSelection(option)}
+        >
+          <Text style={[styles.optionText, selectedAnswer === option && styles.selectedOptionText]}>
+            {option.description}
+          </Text>
+        </TouchableOpacity>
         ))}
+      </View>
     </View>
     );
 }
