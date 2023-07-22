@@ -47,12 +47,12 @@ const HomeScreen = ({navigation}) => {
 
   const render = ({item}) => {
     return (
-      <TouchableOpacity onPress={() => handleNavigation(item.id)} style= {{justifyContent: 'space-between', borderWidth: 1}}>
+      <TouchableOpacity onPress={() => handleNavigation(item.id)} style= {{justifyContent: 'space-between', marginBottom: 35, borderWidth: 1}}>
         <View style={{padding:16, width: 'auto'}}>
-          <Image
+          <Image 
             style={{width: 'auto', height: SCREEN_HEIGHT/3}}
             source={item.imageURL} />
-          <Text>{item.name}</Text>
+          <Text style={{textAlign: 'center'}}>{item.name}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -60,7 +60,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={{padding: 16}}>
+      <View style={{padding: 30}}>
         <FlatList
         contentContainerStyle={{justifyContent: 'space-between'}}
         style={{marginTop:16}}
