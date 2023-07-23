@@ -14,6 +14,20 @@ const AppStyles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
       },
+      buttonstyle: {     
+        backgroundColor: 'gold',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 30,
+        marginHorizontal: 5,
+      },
+      submitbuttonstyle: {   
+        backgroundColor: 'limegreen',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 30,
+        marginHorizontal: 5,
+      },
       SectionStyle: {
         flexDirection: 'row',
         height: 40,
@@ -26,6 +40,11 @@ const AppStyles = StyleSheet.create({
         color: 'white',
         paddingVertical: 8,
         fontWeight: 'bold',
+        fontSize: 16,
+      },
+      buttontextStyle: {
+        color: 'black',
+        paddingVertical: 10,
         fontSize: 16,
       },
       inputStyle: {

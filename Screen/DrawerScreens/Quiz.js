@@ -3,6 +3,7 @@ import {View, ActivityIndicator, Button, Text, TouchableOpacity} from 'react-nat
 import AsyncStorage from '@react-native-community/async-storage';
 import QuizQuestionItem from '../Components/QuizQuestionItem';
 import styles from '../../styles/QuizStyles';
+import AppStyles from '../../styles/shared-styles';
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([]);
@@ -94,7 +95,7 @@ const Quiz = () => {
         <View style={styles.topSection}>
           <Text style={styles.questionNumber}>{`Question ${currentQuestionNumber} of ${totalQuestions}`}</Text>
           <View style={styles.progressBarContainer}>
-            <View style={[styles.progressBar, { width: `${quizProgress}%` }]} />
+            <View style={[styles.progressBar, { width: `${quizProgress}%` , backgroundColor: 'limegreen'}]} />
           </View>        
         </View>
       <QuizQuestionItem question={currentQuestion}
@@ -102,13 +103,27 @@ const Quiz = () => {
         onAnswerSelection={(answer) => handleAnswerSelection(currentQuestion.id, answer)}
       />
        <View style={styles.buttons}>
-        <Button style={{color: 'green'}} title="Previous" onPress={handlePrevious} disabled={currentIndex === 0} />
+       <TouchableOpacity
+          style={[AppStyles.buttonstyle, { backgroundColor: 'gold' }]} // Add backgroundColor style to change the button background color to gold
+          onPress={handlePrevious}
+          disabled={currentIndex === 0}
+        >
+          <Text style={AppStyles.buttontextStyle}>Previous</Text>
+        </TouchableOpacity>
         {currentIndex === questions.length - 1 ? (
-          <TouchableOpacity style={styles.submitButton} onPress={submitAnswers}>
-            <Text style={styles.submitButtonText}>Submit</Text>
+          <TouchableOpacity
+            style={[AppStyles.submitbuttonstyle, { backgroundColor: 'limegreen' }]} // Add backgroundColor style to change the button background color to gold
+            onPress={submitAnswers}
+          >
+            <Text style={AppStyles .buttontextStyle}>Submit</Text>
           </TouchableOpacity>
         ) : (
-          <Button style={{color: 'green'}} title="Next" onPress={handleNext} />
+          <TouchableOpacity
+            style={[AppStyles.submitbuttonstyle, { backgroundColor: 'gold' }]} // Add backgroundColor style to change the button background color to gold
+            onPress={handleNext}
+          >
+            <Text style={AppStyles.buttontextStyle}>Next</Text>
+          </TouchableOpacity>
         )}
       </View>
       </View>
