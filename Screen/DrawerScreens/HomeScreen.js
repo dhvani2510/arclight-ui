@@ -1,10 +1,13 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import {View, Text, SafeAreaView, Image} from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
-const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const HomeScreen = ({navigation}) => {
+  const windowDimensions = useWindowDimensions();
+  const isPortrait = windowDimensions.height > windowDimensions.width;
+  const SCREEN_HEIGHT = windowDimensions.height;
+
   const categories = [
     {
       id: 1,
@@ -47,10 +50,11 @@ const HomeScreen = ({navigation}) => {
 
   const render = ({item}) => {
     return (
-      <TouchableOpacity onPress={() => handleNavigation(item.id)} style= {{justifyContent: 'space-between', marginBottom: 35, borderWidth: 1}}>
+      <TouchableOpacity onPress={() => handleNavigation(item.id)} 
+        style= {[{justifyContent: 'space-between', marginBottom: 35, borderWidth: 1}, ]}>
         <View style={{padding:16, width: 'auto'}}>
           <Image 
-            style={{width: 'auto', height: SCREEN_HEIGHT/3}}
+            style={[{width: 'auto', height: SCREEN_HEIGHT/3},!isPortrait && {width: 'auto', height: SCREEN_HEIGHT/0.7}]}
             source={item.imageURL} />
           <Text style={{textAlign: 'center'}}>{item.name}</Text>
         </View>

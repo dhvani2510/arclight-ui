@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const AppStyles = StyleSheet.create({
+  portraitStyles: {
+    paddingTop: '20%',
+    paddingBottom: '5%'
+  },
     buttonStyle: {    // main buttons 
         backgroundColor: 'gold',
         borderWidth: 0,

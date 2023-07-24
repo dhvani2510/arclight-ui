@@ -14,14 +14,6 @@ const BasicLearning = ({navigation}) => {
           name: "Colors",
         },
         {
-          id: 3,
-          name: "Days",
-        },
-        {
-          id: 4,
-          name: "Months",
-        },
-        {
           id: 5,
           name: "Shapes",
         },

@@ -21,7 +21,7 @@ const SplashScreen = ({navigation}) => {
       setAnimating(false);
       AsyncStorage.getItem('access-token').then((value) => {
         if(value)
-          navigation.navigate('DrawerNavigationRoutes', {screen: 'Home'});
+          navigation.navigate('App');
         else
           navigation.navigate('Auth', {screen: 'Login'});
       });

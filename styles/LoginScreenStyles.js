@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const LoginScreenStyles = StyleSheet.create({
     mainBody: {
       flex: 1,
-      justifyContent: 'center',
       backgroundColor: '#FFF',
       alignContent: 'center',
     },
