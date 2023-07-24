@@ -1,14 +1,17 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from '../../styles/QuizStyles';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useWindowDimensions } from 'react-native';
 
 const QuizQuestionItem = ({question, selectedAnswer, onAnswerSelection}) => {
+  const windowDimensions = useWindowDimensions();
+  const isPortrait = windowDimensions.height > windowDimensions.width;
     return (
     <View style={styles.questionContainer}>
       <Text style={[styles.questionText]}>
             {question.description}
       </Text>
-      <ScrollView style={styles.options}>
+      <ScrollView contentContainerStyle={{width: windowDimensions.width, alignItems: 'center'}}>
         {question.choices.map((option, index) => (
           <TouchableOpacity
           key={index}

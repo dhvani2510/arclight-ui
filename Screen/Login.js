@@ -1,5 +1,6 @@
 import React, {useState, createRef} from 'react';
-import { TextInput, View, Text, ScrollView, Image, Keyboard, TouchableOpacity, KeyboardAvoidingView, } from 'react-native';
+import { TextInput, View, Text, ScrollView, Image, Keyboard, 
+  TouchableOpacity, KeyboardAvoidingView, useWindowDimensions} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Loader from './Components/Loader';
@@ -36,6 +37,8 @@ const LoginScreen = () => {
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
   const navigation = useNavigation();
+  const windowDimensions = useWindowDimensions();
+  const isPortrait = windowDimensions.height > windowDimensions.width;
 
   const passwordInputRef = createRef();
 
@@ -69,7 +72,7 @@ const LoginScreen = () => {
   };
 
   return (
-   <View style={LoginScreenStyles.mainBody}>
+   <ScrollView style={[LoginScreenStyles.mainBody, isPortrait && AppStyles.portraitStyles]} >
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -78,7 +81,7 @@ const LoginScreen = () => {
           justifyContent: 'center',
           alignContent: 'center',
         }}>
-        <View>
+        <View style={{flex:1}}>
           <KeyboardAvoidingView enabled>
             <View style={{alignItems: 'center'}}>
               <Image
@@ -148,7 +151,7 @@ const LoginScreen = () => {
           </KeyboardAvoidingView>
         </View>
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 };
 export default LoginScreen;

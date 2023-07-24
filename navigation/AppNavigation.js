@@ -19,6 +19,7 @@ export default function AppNavigation() {
   const isUserAuthenticated = token === null ? false : true;
     return (
       <Stack.Navigator>
+      <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Auth" component={AuthNavigation} options={{headerShown: false}}/>
       <Stack.Screen name="App" component={DrawerNav} options={{headerShown:false}}/>
     </Stack.Navigator>

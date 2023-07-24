@@ -22,6 +22,7 @@ const ProfileUpdateScreen = () => {
 
   const [profile, setProfile] = React.useState([]); 
   const [loading, setLoading] = useState(false);
+  const [errorText, setErrorText] = useState(null);
   let [token,setToken] = useState(null);
 
   const handleFirstNameChange = (value) => {
@@ -78,11 +79,16 @@ const ProfileUpdateScreen = () => {
     const response = await updateProfile(data);
     setLoading(false);
     if(response.status == 200) {
+      setLoading(false);
       AsyncStorage.setItem('user', JSON.stringify(response.data));
       setProfile(response.data);
     }
-    else
-      console.error(response.message);
+    else {
+      setLoading(false);
+      setErrorText(response.message);
+      alert(errorText);
+      return;
+    }
   }
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
